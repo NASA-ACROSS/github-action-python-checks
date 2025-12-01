@@ -1,0 +1,45 @@
+name: Python Checks
+description: Run checks for Python projects
+
+inputs:
+  check-type:
+    description: Type of check to run (format, test, types)
+    required: true
+  ssh-private-key:
+    description: SSH private key for setup
+    required: false
+  changed-files:
+    description: Only check changed files for formatting
+    required: false
+    default: 'true'
+
+runs:
+  using: composite
+  steps:
+    - name: Formatting (ruff)
+      if: inputs.check-type == 'format'
+      uses: astral-sh/ruff-action@v1
+      with:
+        args: format --check
+        changed-files: ${{ inputs.changed-files }}
+
+    - name: Setup SSH
+      if: inputs.check-type != 'format' && inputs.ssh-private-key != ''
+      shell: bash
+      run: |
+        mkdir -p ~/.ssh
+        echo "${{ inputs.ssh-private-key }}" > ~/.ssh/id_rsa
+        chmod 600 ~/.ssh/id_rsa
+        ssh-keyscan github.com >> ~/.ssh/known_hosts
+
+    - name: Run Tests
+      if: inputs.check-type == 'test'
+      shell: bash
+      run: |
+        make test
+
+    - name: Run Type Checking
+      if: inputs.check-type == 'types'
+      shell: bash
+      run: |
+        make types
