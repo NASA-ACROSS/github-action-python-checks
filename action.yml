@@ -25,12 +25,9 @@ runs:
 
     - name: Setup SSH
       if: inputs.check-type != 'format' && inputs.ssh-private-key != ''
-      shell: bash
-      run: |
-        mkdir -p ~/.ssh
-        echo "${{ inputs.ssh-private-key }}" > ~/.ssh/id_rsa
-        chmod 600 ~/.ssh/id_rsa
-        ssh-keyscan github.com >> ~/.ssh/known_hosts
+      uses: ACROSS-Team/github-action-python-setup@v1
+      with:
+        ssh-private-key: ${{ secrets.ssh-private-key }}
 
     - name: Run Tests
       if: inputs.check-type == 'test'
