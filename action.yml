@@ -25,7 +25,7 @@ runs:
 
     - name: Setup SSH
       if: inputs.check-type != 'format' && inputs.ssh-private-key != ''
-      uses: ACROSS-Team/github-action-python-setup@v1
+      uses: ACROSS-Team/github-action-python-setup@v1.0.0
       with:
         ssh-private-key: ${{ secrets.ssh-private-key }}
 
