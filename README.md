@@ -14,7 +14,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: ACROSS-Team/github-actions-python-checks@latest
+      - uses: NASA-ACROSS/github-actions-python-checks@latest
         with:
           check-type: format
 
@@ -22,7 +22,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: ACROSS-Team/github-actions-python-checks@latest
+      - uses: NASA-ACROSS/github-actions-python-checks@latest
         with:
           check-type: test
           ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
@@ -31,7 +31,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: ACROSS-Team/github-actions-python-checks@latest
+      - uses: NASA-ACROSS/github-actions-python-checks@latest
         with:
           check-type: types
           ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
@@ -39,8 +39,8 @@ jobs:
 
 ## Inputs
 
-| Name | Description | Default | Required |
-|------|-------------|---------|----------|
-| `check-type` | Type of check to run. Options: `format`, `test`, `types` | N/A | Yes |
-| `ssh-private-key` | SSH private key for accessing private repositories during setup | N/A | No |
-| `changed-files` | Only check changed files for formatting (Python only) | `true` | No |
+| Name              | Description                                                     | Default | Required |
+| ----------------- | --------------------------------------------------------------- | ------- | -------- |
+| `check-type`      | Type of check to run. Options: `format`, `test`, `types`        | N/A     | Yes      |
+| `ssh-private-key` | SSH private key for accessing private repositories during setup | N/A     | No       |
+| `changed-files`   | Only check changed files for formatting (Python only)           | `true`  | No       |

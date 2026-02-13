@@ -11,7 +11,7 @@ inputs:
   changed-files:
     description: Only check changed files for formatting
     required: false
-    default: 'true'
+    default: "true"
 
 runs:
   using: composite
@@ -25,7 +25,7 @@ runs:
 
     - name: Setup SSH
       if: inputs.check-type != 'format' && inputs.ssh-private-key != ''
-      uses: ACROSS-Team/github-action-python-setup@v1.0.0
+      uses: NASA-ACROSS/github-action-python-setup@v1.0.0
       with:
         ssh-private-key: ${{ inputs.ssh-private-key }}
 
